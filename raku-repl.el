@@ -65,7 +65,7 @@
 (defun switch-to-raku (eob-p)
   "Start a Raku REPL, or switch to a running one.
 Reuses an existing REPL window if visible, otherwise switches in
-current window.  With prefix argument EOB-P, move point to the end of
+current window. With prefix argument EOB-P, move point to the end of
 the buffer."
   (interactive "P")
   (let* ((buf-name (format "*%s*" raku-buffer-name))
