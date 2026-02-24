@@ -62,7 +62,7 @@
   "Raku process name."
   (get-process raku-buffer-name))
 
-(defun raku-switch-to-raku (eob-p)
+(defun switch-to-raku (eob-p)
   "Switch to the Raku REPL buffer, starting one if necessary.
 Reuses an existing REPL window if visible, otherwise switches in current window.
 With prefix argument EOB-P, move point to the end of the buffer."
