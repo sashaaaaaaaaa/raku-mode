@@ -62,6 +62,23 @@
   "Raku process name."
   (get-process raku-buffer-name))
 
+(defun raku-switch-to-raku (eob-p)
+  "Switch to the Raku REPL buffer, starting one if necessary.
+Reuses an existing REPL window if visible, otherwise switches in current window.
+With prefix argument EOB-P, move point to the end of the buffer."
+  (interactive "P")
+  (let* ((buf-name (format "*%s*" raku-buffer-name))
+         (buf (get-buffer buf-name))
+         (win (and buf (get-buffer-window buf))))
+    (if win
+        (select-window win)
+      (switch-to-buffer (get-buffer-create buf-name))))
+  (unless (process-live-p (raku-comint-get-process))
+    (run-raku))
+  (when eob-p
+    (push-mark)
+    (goto-char (point-max))))
+
 (defun raku-send-string-to-repl (str)
   "Send STR to the repl."
   (comint-send-string (raku-comint-get-process)
