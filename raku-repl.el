@@ -7,6 +7,8 @@
 (require 'comint)
 (require 'raku-font-lock)
 
+(define-key raku-repl-mode-map (kbd "C-c C-z") #'switch-to-raku)
+
 (defcustom raku-exec-path "raku"
   "Raku executable path."
   :type 'string
