@@ -63,17 +63,16 @@
   (get-process raku-buffer-name))
 
 (defun switch-to-raku (eob-p)
-  "Start a Raku REPL, or switch to a running one.
-Reuses an existing REPL window if visible, otherwise switches in
-current window. With prefix argument EOB-P, move point to the end of
-the buffer."
+  "Switch to the Raku REPL buffer, starting one if necessary."
   (interactive "P")
   (let* ((buf-name (format "*%s*" raku-buffer-name))
-         (buf (get-buffer buf-name))
-         (win (and buf (get-buffer-window buf))))
-    (if win
-        (select-window win)
-      (switch-to-buffer (get-buffer-create buf-name))))
+         (buf (get-buffer-create buf-name))
+         (win (get-buffer-window buf)))
+    (if (eq (selected-window) win)
+        (other-window -1)
+      (if win
+          (select-window win)
+        (switch-to-buffer-other-window buf))))
   (unless (process-live-p (raku-comint-get-process))
     (run-raku))
   (when eob-p
