@@ -7,8 +7,6 @@
 (require 'comint)
 (require 'raku-font-lock)
 
-(define-key raku-repl-mode-map (kbd "C-c C-z") #'switch-to-raku)
-
 (defcustom raku-exec-path "raku"
   "Raku executable path."
   :type 'string
@@ -44,6 +42,8 @@
   (setq-local comment-end "")
   ;; Don't jump beyond the prompt with M-{ or M-}.
   (setq-local paragraph-start raku-prompt-regexp))
+
+(define-key raku-repl-mode-map (kbd "C-c C-z") #'switch-to-raku)
 
 (defun run-raku ()
   "Run an inferior instance of `raku' inside Emacs."
